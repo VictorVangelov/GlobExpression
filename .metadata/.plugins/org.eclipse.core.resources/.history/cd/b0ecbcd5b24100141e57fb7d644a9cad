@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+
+public class GlobeExpression {
+	String userInput=null;
+	boolean firstCharIsSpecialSymbol=false;
+	
+	public  void takingtUserInput(){
+		Scanner input = new Scanner(System.in);
+		userInput = input.nextLine();
+		input.close();		
+	}
+	boolean checkFirstChar(){
+		char firstChar = this.userInput.charAt(0);
+	if( firstChar== '*' || firstChar=='?' || firstChar=='{' ){}
+		return false;
+	}
+	public static void main(String  args[]){
+		String asd= "dasd";
+		asd.toCharArray();
+		System.out.println(asd.charAt(0));
+		
+	}
+
+}
