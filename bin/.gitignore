@@ -2,3 +2,5 @@
 /IRecognizePattern.class
 /QuestionmarkPattern.class
 /QuestionmarkWordPattern.class
+/IWordsCollectable.class
+/ICollectableWords.class
