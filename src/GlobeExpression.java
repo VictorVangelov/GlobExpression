@@ -102,7 +102,7 @@ public class GlobeExpression {
 QuestionmarkPattern asd= new QuestionmarkWordPattern();
 int a=0;
 int b=0;
-int c=0;
+int c=1;
 	}
 
 }
