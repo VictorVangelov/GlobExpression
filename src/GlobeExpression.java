@@ -100,9 +100,9 @@ public class GlobeExpression {
 	
 	public static void main(String args[]) {
 QuestionmarkPattern asd= new QuestionmarkWordPattern();
-int a;
+int a=0;
 int b=0;
-int c;
+int c=0;
 	}
 
 }
