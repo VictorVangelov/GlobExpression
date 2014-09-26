@@ -2,7 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GlobeExpression {
-	String userInput = null;
+	static int Pattern=0;
+	String compileInput = null;
 	boolean firstCharIsSpecialSymbol = false;
 	boolean itsSmileyBracketsPattern = false;
 	boolean itsQuestionmarkPattern = false;
@@ -18,8 +19,8 @@ public class GlobeExpression {
 	public void takingUserInput() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Please enter your finding pattern");
-		userInput = input.nextLine();
-		if (userInput.length() == 0 || userInput == null) {
+		compileInput = input.nextLine();
+		if (compileInput.length() == 0 || compileInput == null) {
 			System.out.println("You must enter some kind of pattern");
 			takingUserInput();
 		}
@@ -27,7 +28,7 @@ public class GlobeExpression {
 	}
 
 	void checkFirstChar() {
-		char firstChar = this.userInput.charAt(0);
+		char firstChar = this.compileInput.charAt(0);
 		if (itsSmileyBracketsPattern) {
 			if (firstChar == '*' || firstChar == '?' || firstChar == '{') {
 				firstCharIsSpecialSymbol = true;
@@ -39,8 +40,8 @@ public class GlobeExpression {
 	}
 
 	void recognizePattern() {
-		for (int i = 0; i < userInput.length(); i++) {
-			if (userInput.charAt(i) == '?') 
+		for (int i = 0; i < compileInput.length(); i++) {
+			if (compileInput.charAt(i) == '?') 
 			{
 				if(itsQuestionmarkPattern)
 				{
