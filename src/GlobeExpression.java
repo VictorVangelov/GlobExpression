@@ -1,25 +1,28 @@
-import java.awt.List;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
-public class GlobeExpression {
+public class GlobeExpression implements ICompileAndMatch {
 	static int numberOfPattern= 0;
-	String compileInput = null;
-	String matchInput = null;
+	static String compileInput = null;
+	static String matchInput = null;
 	boolean itsValidPattern=false;
 	boolean canCrossDirectories=false;
+	boolean itsCrossingDirectories=false;
 	static int numberOfSpecialChars=0;
-	boolean firstCharIsSpecialSymbol = false;
+	
 	boolean patternStartWithStar=false;
 	boolean patternStartWithQuestionmark=false;
+	static int lenghtOfAllCollectedWords=0;
 
-	ArrayList<String> collectedWards = null;
-
+	static String[] collectedWordsArray = null;
+	static String[] collectedSeparatorsArray = null;
+	static String[] collectedWordsBetweenBrackets=null;
 	public void takeCompileInput() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Please enter your finding pattern");
 		compileInput = input.nextLine();
-		if (compileInput.length() == 0 || compileInput == null) {
+		if (compileInput.length() == 0 || compileInput == null) 
+		{
 			System.out.println("You must enter some kind of pattern");
 			takeCompileInput();
 		}
@@ -27,34 +30,23 @@ public class GlobeExpression {
 	}
 	public void takeMatchInput ()
 	{
-		
 			Scanner input = new Scanner(System.in);
 			System.out.println("Please enter the word you want to check ");
 			matchInput = input.nextLine();
-			if (matchInput.length() == 0 || matchInput == null) {
+			if (matchInput.length() == 0 || matchInput == null)
+			{
 				System.out.println("You must enter some word to match. /n Please try again or type \"alt+f4\" to stop the program");
 				takeMatchInput();
 				if(matchInput.equals("alt+f4"))
 				{
 				System.exit(0);
-				}else matchInput=input.nextLine();
+				}
+				else matchInput=input.nextLine();
 			}
 			input.close();
 		
 	}
-
-	void checkFirstChar() {
-	/*	char firstChar = this.compileInputCharArray[0];
-		if (itsSmileyBracketsPattern) {
-			if (firstChar == '*' || firstChar == '?' || firstChar == '{') {
-				firstCharIsSpecialSymbol = true;
-			}
-		} else if (firstChar == '*' || firstChar == '?') {
-			firstCharIsSpecialSymbol = true;
-		}
-*/
-	}
-void checkForSmileyBracketsPattern(int i)
+	void checkForSmileyBracketsPattern(int i)
 {
 	
 	for (int j=i;j<compileInput.length();j++)
@@ -69,7 +61,7 @@ void checkForSmileyBracketsPattern(int i)
 			}			
 	}	
 }
-	void recognizePattern()
+	public void recognizePattern()
 	{
 		char[] compileInputCharArray= compileInput.toCharArray();
 
@@ -163,9 +155,11 @@ void checkForSmileyBracketsPattern(int i)
 		}
 	
 	}
-
-
-
+   static  void collectWordsAndSeparators()
+    {
+    	collectedWordsArray = compileInput.split("[\\W\\s {}.,:]+");
+    	collectedWordsArray = compileInput.split("[\\w\\s{}.:]+");
+    }
 
 
 	void printPatternName(int numberOfPattern)
@@ -173,8 +167,8 @@ void checkForSmileyBracketsPattern(int i)
 		switch (numberOfPattern)
 		{
 			case -1 : System.out.println("Sorry but this pattern is not available on this version. Please select one of our other search patterns");break;
-			default  : System.out.println("You choice our defaut search pattern");break;
-			case 10 : System.out.println("You choose Questionmark pattern");break;
+			case 0  : System.out.println("You choice our defaut search pattern");break;
+			case 10 : System.out.println("You choose ? pattern");break;
 			case 11 : System.out.println("You choose Word? pattern");break;
 			case 12 : System.out.println("You choose ?Word pattern");break;
 			case 13 : System.out.println("You choose Word?Word pattern");break;
@@ -183,8 +177,8 @@ void checkForSmileyBracketsPattern(int i)
 			case 22 : System.out.println("You choose *Word pattern");break;
 			case 23 : System.out.println("You choose Word*Word pattern");break;
 			case 30 : System.out.println("You choose ?and* pattern");break;
-			case 31 : System.out.println("You choose *word? pattern");break;
-			case 32 : System.out.println("You choose ?word* pattern");break;
+			case 31 : System.out.println("You choose ?word* pattern");break;
+			case 32 : System.out.println("You choose *word? pattern");break;
 			case 33 : System.out.println("You choose word*word? pattern");break;
 			case 34 : System.out.println("You choose word?word* pattern");break;
 			case 35 : System.out.println("You choose word*word?word pattern");break;
@@ -199,32 +193,72 @@ void checkForSmileyBracketsPattern(int i)
 			case 53 : System.out.println("You choose *word*word pattern");break;
 			case 54 : System.out.println("You choose word*word*word pattern");break;			
 			case 60 : System.out.println("You choose {} pattern");break;
-			case 61 : System.out.println("You choose word{words} pattern");break;
-			case 62 : System.out.println("You choose {words}word pattern");break;				
+			case 61 : System.out.println("You choose word{word} pattern");break;
+			case 62 : System.out.println("You choose word{words} pattern");break;
+			case 63 : System.out.println("You choose word{ints} pattern");break;
+			case 65 : System.out.println("You choose {}word pattern");break;
+			case 66 : System.out.println("You choose {word}word pattern");break;
+			case 67 : System.out.println("You choose {words}word pattern");break;
+			case 68 : System.out.println("You choose {ints}word pattern");break;
+							
 		}
 		
 	}
 	
+	void calculateLenghtOfAllCollectedWords()
+	{
+		for(int i=0;i<collectedWordsArray.length;i++)
+		{
+			lenghtOfAllCollectedWords+=collectedWordsArray[i].length();
+		}
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	Object returnSomePattern(){
+	return new QuestionmarkPattern();	
+	}
 	
 	public static void main(String args[])
 	{
-		String asd = "asd?a";
-	int i=2;
-		if (asd.charAt(3) == '?' && (i+1) < asd.length())
+		
+		
+		
+		
+		
+		
+		
+		
+		char ascending='A';
+		char descending='z';
+		while (ascending<='Z')
 		{
-			System.out.println("its true");
+		System.out.println (ascending + " " + descending);
+		ascending++;
+		descending--;
 		}
+		
+	
+		/*int code ='97';
+		int code = (int) ch;
+		char dsa = (char) code;
+		System.out.println("code : " +dsa);*/
+		
+		/*compileInput= "aide?aide";
+		matchInput = "aidehaide";
+		collectedSeparatorsArray = compileInput.split("[\\w\\s{}.:]+");
+		collectedWordsArray = compileInput.split("[\\W\\s{}.,:]+");
+		
+		
+		for(String collectedWord : collectedWordsArray) {
+			System.out.println(collectedWord);	
+			
+		}*/
+		//System.out.println(collectedWordsArray.length);
+
 	}
+	public boolean match(char ch) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 }
