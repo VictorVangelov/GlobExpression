@@ -1,7 +1,7 @@
 
-public class QuestionmarkPattern extends Pattern implements  ICompileAndMatch{
+public class QuestionmarkPattern extends Pattern {
 
-public void recognizePattern() 
+	 public void recognizeInPattern() 
 {
 	if(collectedWordsArray.length==1)
 	{
@@ -12,32 +12,45 @@ public void recognizePattern()
 	else if(collectedWordsArray.length==2) { numberOfPattern+=3; }
 }
 
-public boolean match(char ch) 
+public static boolean match(char ch) 
 { 
-	if(matchInput.length()==1)  {  return true;	} 
+	if(matchInput.length()==1)  
+	{
+		theyMatch=true;
+		return true;
+	}
 	else   {	return false;	}
 }
 
-public boolean match(String str , char ch) 
+public static boolean match(String str , char ch) 
 {
 	if(matchInput.startsWith(collectedWordsArray[0]) 
 			& matchInput.length()== lenghtOfAllCollectedWords)
-	{ 	return true; 	}
+	{
+		theyMatch=true;
+		return true;
+	}
 	else {return false;}
 }
-public boolean match(char ch , String str) 
+public static boolean match(char ch , String str) 
 {
 	if(matchInput.endsWith(collectedWordsArray[0])
 			&matchInput.length()==lenghtOfAllCollectedWords+1)
-	{return true;}
+	{
+		theyMatch=true;
+		return true;
+	}
 	else {return false;}
 }
-public boolean match(String str1 , char ch , String str2) 
+public static boolean match(String str1 , char ch , String str2) 
 {
 	if(matchInput.startsWith(collectedWordsArray[0])
 			& matchInput.endsWith(collectedWordsArray[1]) 
 					& matchInput.length()  == lenghtOfAllCollectedWords+1)
-	{return true;}
+	{
+		theyMatch=true;
+		return true;
+	}
 	else {return false;}
 }
 
