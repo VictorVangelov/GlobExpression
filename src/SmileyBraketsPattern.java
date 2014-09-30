@@ -15,6 +15,8 @@ public class SmileyBraketsPattern extends Pattern {
 		}
 		else if(braketsWords.contains(","))
 		{numberOfPattern+=2;}
+		else if(braketsWords.contains(",")&braketsWords.contains("-"))
+		{	numberOfPattern=-1;		}
 		else 		{numberOfPattern+=1;}
 		
 		

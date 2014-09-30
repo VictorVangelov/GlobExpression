@@ -79,6 +79,7 @@ public class Pattern implements ICompileAndMatch
 
 	public static void recognizePattern()
 	{
+		
 		char[] compileInputCharArray= compileInput.toCharArray();
 
 		for(int i=0;i<compileInput.length();i++)
@@ -467,18 +468,6 @@ public class Pattern implements ICompileAndMatch
 		compile();
 		match();
 
-		/*compileInput="{asd,dsa}asd";
-		String word = compileInput.substring(compileInput.indexOf("}")+1 , compileInput.length()) ;
-		collectedWordsArray=word.split("[]+");
-		lenghtOfAllCollectedWords=0;
-		int i=0;
-		while (i < collectedWordsArray.length)
-		{
-			lenghtOfAllCollectedWords+=collectedWordsArray[i].length();
-			i++;
-		}
-		System.out.println(lenghtOfAllCollectedWords);
-		*/
 		
 		
 	}
